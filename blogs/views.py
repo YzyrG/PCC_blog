@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import BlogPost
@@ -40,7 +40,7 @@ def new_post(request):
 @login_required
 def edit_post(request, post_id):
 	"""编辑帖子的视图"""
-	post = BlogPost.objects.get(id=post_id)
+	post = get_object_or_404(BlogPost, id=post_id)
 	# 检查帖子是否属于当前用户
 	check_post_owner(request, post)
 	if request.method != 'POST':
