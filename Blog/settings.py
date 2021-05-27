@@ -138,3 +138,9 @@ LOGIN_URL = 'users:login'
 # Heroku设置
 import django_heroku
 django_heroku.settings(locals())
+
+# 设置的意义，可以自己设置DEBUG的值
+if os.environ.get('DEBUG') == 'TRUE':
+    DEBUG = True
+elif os.environ.get('DEBUG') == 'FALSE':
+    DEBUG = False
