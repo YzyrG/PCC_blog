@@ -1,0 +1,27 @@
+{% extends 'blogs/base.html' %}
+
+{% block page_header %}
+	<h3>已发布的帖子</h3>
+{% endblock page_header %}
+
+{% block content %}
+	<p><a href="{% url 'blogs:new_post' %}">在这里新增帖子</a></p>
+
+	{% for post in posts %}
+		<div class="card mb-4">
+			<div class="card-header">
+				{{ post.title }}&nbsp;
+				<small>{{ post.date_added|date:'M d,Y H:i' }}</small>
+			</div>
+			<div class="card-body">		
+				<p class="card-text user-select-auto">{{ post.text|linebreaks }}</p>
+			</div>
+			<div class="card-footer">
+				<a class="card-link" href="{% url 'blogs:edit_post' post.id %}">编辑帖子</a>
+			</div>
+		</div>
+	{% empty %}
+			<p>there does't have any post yet.</p>
+	{% endfor %}
+
+{% endblock content %}
